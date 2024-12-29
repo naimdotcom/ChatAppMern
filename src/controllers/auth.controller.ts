@@ -165,4 +165,33 @@ const logout = async (req: Request, res: Response) => {
   }
 };
 
-export { signUp, login, logout };
+const updateProfile = (req: Request, res: Response) => {
+  try {
+    const { name } = req.body;
+
+    if (!name) {
+      res
+        .status(400)
+        .json(
+          new ApiErrorResponse<string>(
+            false,
+            HttpStatusResponse.badRequest,
+            "Name is required"
+          )
+        );
+      return;
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json(
+        new ApiErrorResponse<string>(
+          false,
+          HttpStatusResponse.internalServerError,
+          "Internal server error"
+        )
+      );
+  }
+};
+
+export { signUp, login, logout, updateProfile };
