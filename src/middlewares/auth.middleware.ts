@@ -1,11 +1,7 @@
 import Jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "../models/user.model";
 import { NextFunction, Request, Response } from "express";
-import { ApiErrorResponse, HttpStatusResponse } from "../utils";
-
-interface userRequest extends Request {
-  user?: object;
-}
+import { ApiErrorResponse, HttpStatusResponse, userRequest } from "../utils";
 
 const verifyJWT = async (
   req: userRequest,

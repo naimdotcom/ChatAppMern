@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 enum HttpStatusResponse {
   ok = "response ok 200",
   created = "response created 201",
@@ -38,4 +40,8 @@ enum HttpStatusResponse {
   networkAuthenticationRequired = "response network authentication required 511",
 }
 
-export { HttpStatusResponse };
+interface userRequest extends Request {
+  user?: object;
+}
+
+export { HttpStatusResponse, userRequest };

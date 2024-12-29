@@ -5,6 +5,7 @@ import {
   comparePassword,
   generateHash,
   generateToken,
+  userRequest,
 } from "../utils";
 import { Request, Response } from "express";
 import { User } from "../models/user.model";
@@ -165,22 +166,9 @@ const logout = async (req: Request, res: Response) => {
   }
 };
 
-const updateProfile = (req: Request, res: Response) => {
+const updateProfile = (req: userRequest, res: Response) => {
   try {
-    const { name } = req.body;
-
-    if (!name) {
-      res
-        .status(400)
-        .json(
-          new ApiErrorResponse<string>(
-            false,
-            HttpStatusResponse.badRequest,
-            "Name is required"
-          )
-        );
-      return;
-    }
+    const { user } = req;
   } catch (error) {
     res
       .status(500)
