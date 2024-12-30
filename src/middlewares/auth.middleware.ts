@@ -1,9 +1,15 @@
 import Jwt, { JwtPayload } from "jsonwebtoken";
-import { User } from "../models/user.model";
+import { IUser, User } from "../models/user.model";
 import { NextFunction, Request, Response } from "express";
-import { ApiErrorResponse, HttpStatusResponse, userRequest } from "../utils";
+import {
+  ApiErrorResponse,
+  CustomRequestHandler,
+  HttpStatusResponse,
+  userRequest,
+} from "../utils";
+import { Document } from "mongoose";
 
-const verifyJWT = async (
+const verifyJWT: CustomRequestHandler = async (
   req: userRequest,
   res: Response,
   next: NextFunction
@@ -21,6 +27,7 @@ const verifyJWT = async (
             "User not logged in"
           )
         );
+      return;
     }
 
     const decoded = Jwt.verify(
@@ -38,10 +45,11 @@ const verifyJWT = async (
             "Invalid token"
           )
         );
+      return;
     }
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id).select("-password -__v ");
 
-    if (Object.keys(user as object).length === 0) {
+    if (!user) {
       res
         .status(401)
         .json(
@@ -51,9 +59,10 @@ const verifyJWT = async (
             "User not found"
           )
         );
+      return;
     }
 
-    req.user = user as object;
+    req.user = user as Document<unknown, {}, IUser> & IUser;
     next();
   } catch (error) {
     res
@@ -65,6 +74,7 @@ const verifyJWT = async (
           "Unauthorized"
         )
       );
+    return;
   }
 };
 

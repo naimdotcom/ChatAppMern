@@ -1,4 +1,6 @@
-import { Request } from "express";
+import { NextFunction, Request, Response } from "express";
+import { IUser, User } from "../models/user.model";
+import { Document } from "mongoose";
 
 enum HttpStatusResponse {
   ok = "response ok 200",
@@ -41,7 +43,14 @@ enum HttpStatusResponse {
 }
 
 interface userRequest extends Request {
-  user?: object;
+  user: Document<unknown, {}, IUser> & IUser;
+  [key: string]: any;
 }
 
-export { HttpStatusResponse, userRequest };
+type CustomRequestHandler = (
+  req: userRequest,
+  res: Response,
+  next: NextFunction
+) => Promise<any> | any;
+
+export { HttpStatusResponse, userRequest, CustomRequestHandler };
