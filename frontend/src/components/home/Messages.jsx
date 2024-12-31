@@ -63,7 +63,7 @@ function Messages() {
             </div>
             {item.image && (
               <div
-                className={`chat-bubble w-3/4 rounded-xl flex flex-col justify-end items-end  ${
+                className={`chat-bubble max-w-[40%] w-full rounded-xl flex flex-col justify-end items-end  ${
                   item.receiver === selectedUser?._id
                     ? "bg-primary text-primary-content"
                     : "bg-base-300 text-base-content"

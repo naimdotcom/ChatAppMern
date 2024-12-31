@@ -11,7 +11,7 @@ function Navbar() {
   const { authUser, logout } = useAuthStore();
 
   useEffect(() => {
-    setUserInfo(authUser?.info);
+    setUserInfo(authUser);
   }, [authUser, setUserInfo]);
 
   return (
