@@ -1,7 +1,12 @@
 services:
   - type: web
-    name: mern-chat-app
+    name: chat-app
     env: node
-    buildCommand: npm run build
-    startCommand: npm start
-    nodeVersion: 20.11.0
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+      cd ../backend
+      npm install
+    startCommand: cd backend && node index.js
+    nodeVersion: 18.x
