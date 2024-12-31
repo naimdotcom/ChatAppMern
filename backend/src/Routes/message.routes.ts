@@ -9,7 +9,7 @@ import { upload } from "../middlewares/multer.middleware";
 
 const _ = express.Router();
 
-_.get("/user", verifyJWT as any, getUserForSidebar as any);
+_.get("/users", verifyJWT as any, getUserForSidebar as any);
 
 _.get("/user/:id", verifyJWT as any, getMessages as any);
 

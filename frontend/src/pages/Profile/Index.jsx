@@ -19,7 +19,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    setUserInfo(authUser?.info ? authUser.info : {});
+    setUserInfo(authUser ? authUser : {});
   }, [authUser, setUserInfo]);
 
   return (

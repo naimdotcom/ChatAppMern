@@ -14,6 +14,8 @@ function App() {
   const { authUser, checkAuth, isCheckAuth } = useAuthStore();
   const { theme } = useThemeStore();
 
+  document.documentElement.setAttribute("data-theme", theme);
+
   useEffect(() => {
     checkAuth();
     console.log(authUser);
