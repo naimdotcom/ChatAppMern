@@ -42,11 +42,6 @@ function MessageInput() {
     }
   };
 
-  useEffect(() => {
-    // formData.append("text", text);
-    // console.log("formData", formData);
-  }, [text]);
-
   return (
     <div>
       <div className="divider divider-neutral"></div>
