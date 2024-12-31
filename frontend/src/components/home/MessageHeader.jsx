@@ -3,25 +3,21 @@ import { useChatStore } from "../../store/useChatStore";
 
 function MessageHeader() {
   const [user, setUser] = useState(null);
-  const { selectedUser, users } = useChatStore();
-
-  useEffect(() => {
-    setUser(users.find((user) => user._id === selectedUser));
-  }, [selectedUser]);
-
-  console.log(selectedUser);
+  const { selectedUser } = useChatStore();
 
   return (
-    <div>
+    <div className="px-4 pt-4">
       <div className="flex w-full gap-5">
         {/* avatar */}
         <div className="avatar placeholder">
           <div className="w-12 rounded-full bg-neutral text-neutral-content">
-            <img src={user ? user.profilePicture : ""} alt="" />
+            <img src={selectedUser ? selectedUser.profilePicture : ""} alt="" />
           </div>
         </div>
         <div>
-          <h3 className="font-semibold">{user ? user.name : ""}</h3>
+          <h3 className="font-semibold">
+            {selectedUser ? selectedUser.name : ""}
+          </h3>
           <h3>online</h3>
         </div>
       </div>

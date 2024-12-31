@@ -85,26 +85,29 @@ const sendMessage = async (req: userRequest, res: Response) => {
         );
       return;
     }
+    let imgUrl;
 
-    const imgUrl = await uploadOnCloudinary(file);
+    if (file) {
+      imgUrl = await uploadOnCloudinary(file);
 
-    if (!imgUrl) {
-      res
-        .status(400)
-        .json(
-          new ApiErrorResponse<string>(
-            false,
-            HttpStatusResponse.badRequest,
-            "Image upload failed"
-          )
-        );
-      return;
+      if (!imgUrl) {
+        res
+          .status(400)
+          .json(
+            new ApiErrorResponse<string>(
+              false,
+              HttpStatusResponse.badRequest,
+              "Image upload failed"
+            )
+          );
+        return;
+      }
     }
     const newMessage = new Message({
       sender: req.user?._id,
       receiver: id,
-      text,
-      image: imgUrl.public_id,
+      text: text?.trim(),
+      image: imgUrl?.public_id,
     });
 
     await newMessage.save();
