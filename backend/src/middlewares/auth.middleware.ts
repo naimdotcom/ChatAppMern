@@ -1,6 +1,6 @@
 import Jwt, { JwtPayload } from "jsonwebtoken";
 import { IUser, User } from "../models/user.model";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import {
   ApiErrorResponse,
   CustomRequestHandler,
