@@ -62,6 +62,7 @@ const signUp = async (req: Request, res: Response) => {
         );
       return;
     }
+    generateToken(newUser._id, res);
 
     // Process the user creation logic here
     res.status(201).json(

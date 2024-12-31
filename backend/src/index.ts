@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(
   cors({
     // todo: update origin later as the frontend route
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
