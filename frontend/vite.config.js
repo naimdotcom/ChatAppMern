@@ -1,9 +1,7 @@
 import { defineConfig } from "vite";
-import reactSWC from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react";
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [reactSWC()],
-  server: {
-    port: 3000,
-  },
+  plugins: [react()],
 });
