@@ -30,7 +30,7 @@ const verifyJWT: CustomRequestHandler = async (
       return;
     }
 
-    const decoded = Jwt.verify(
+    const decoded: JwtPayload = Jwt.verify(
       token,
       process.env.JWT_SECRET as string
     ) as JwtPayload;
