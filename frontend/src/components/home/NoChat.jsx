@@ -3,7 +3,7 @@ import React from "react";
 
 function NoChat() {
   return (
-    <div className=" max-h-[88vh] w-full">
+    <div className="max-h-[88vh] h-full w-full">
       <div className="flex flex-col items-center justify-center h-full gap-6">
         <div className="px-5 pt-9 rounded-xl btn w-fit h-fit">
           <MessageSquareQuote size={100} className="animate-bounce" />

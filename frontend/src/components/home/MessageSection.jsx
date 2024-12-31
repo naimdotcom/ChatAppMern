@@ -5,13 +5,15 @@ import MessageInput from "./MessageInput";
 
 function MessageSection() {
   return (
-    <div className="flex flex-col w-full px-4">
-      <MessageHeader />
-      <div className="divider divider-neutral"></div>
-      <div className="h-full">
+    <div className="flex flex-col h-[calc(100vh-7rem)] w-full md:px-6 ">
+      <div className="flex-none w-full">
+        <MessageHeader />
+        <div className="divider divider-neutral"></div>
+      </div>
+      <div className="flex flex-col flex-1 w-full min-h-0">
         <Messages />
       </div>
-      <div className="items-end">
+      <div className="flex-none w-full">
         <MessageInput />
       </div>
     </div>

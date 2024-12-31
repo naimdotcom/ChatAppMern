@@ -11,8 +11,8 @@ function Sidebar() {
   }, [getUsers]);
 
   return (
-    <div className="">
-      <ul className="w-80 h-[89vh] space-y-3 overflow-y-scroll px-2 pt-6  bg-base-200 rounded-xl">
+    <div className="w-full">
+      <ul className="w-full md:w-64 lg:w-80 h-[calc(100vh-7rem-20px)] space-y-3 overflow-y-scroll px-2 pt-6  bg-base-200 rounded-xl">
         <li className="menu-title">Chats</li>
 
         {isUserLoading
@@ -24,7 +24,7 @@ function Sidebar() {
           : users.map((user) => (
               <li
                 className={`cursor-pointer py-3 px-5 rounded-xl ${
-                  selectedUser === user._id
+                  selectedUser?._id === user._id
                     ? "bg-base-300"
                     : "hover:bg-base-100 "
                 }`}

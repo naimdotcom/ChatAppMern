@@ -23,8 +23,8 @@ function MessageInput() {
   };
 
   const handleOnsubmit = async (e) => {
-    const formData = new FormData();
     e.preventDefault();
+    const formData = new FormData();
     if (!text && !imagePreview) return;
     if (!formData) return toast.error("Please upload an image");
     if (text) formData.append("text", text);
@@ -73,7 +73,7 @@ function MessageInput() {
               className="w-full rounded-full input input-bordered"
               onChange={(e) => setText(e.target.value)}
             />
-            <div>
+            <div className="flex items-center">
               <input
                 type="file"
                 className="hidden"
@@ -92,7 +92,7 @@ function MessageInput() {
             <button
               onClick={handleOnsubmit}
               type="submit"
-              className="px-3 py-3 rounded-full bg-neutral text-neutral-content"
+              className="px-2 py-2 rounded-xl bg-neutral text-neutral-content"
             >
               <Send />
             </button>
