@@ -88,7 +88,7 @@ const sendMessage = async (req: userRequest, res: Response) => {
     let imgUrl;
 
     if (file) {
-      imgUrl = await uploadOnCloudinary(file);
+      imgUrl = await uploadOnCloudinary(req.file as Express.Multer.File);
 
       if (!imgUrl) {
         res
@@ -106,8 +106,8 @@ const sendMessage = async (req: userRequest, res: Response) => {
     const newMessage = new Message({
       sender: req.user?._id,
       receiver: id,
-      text: text?.trim(),
-      image: imgUrl?.public_id,
+      text: text ? text : "",
+      image: imgUrl?.secure_url ? imgUrl?.secure_url : "",
     });
 
     await newMessage.save();

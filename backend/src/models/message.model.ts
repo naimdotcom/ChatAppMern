@@ -16,8 +16,7 @@ const messageSchema = new mongoose.Schema(
       type: String,
     },
     image: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Chat",
+      type: String,
     },
   },
   {

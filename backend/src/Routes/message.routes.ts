@@ -16,7 +16,7 @@ _.get("/user/:id", verifyJWT as any, getMessages as any);
 _.post(
   "/send/:id",
   verifyJWT as any,
-  upload.single("image"),
+  upload.single("image") as any,
   sendMessage as any
 );
 

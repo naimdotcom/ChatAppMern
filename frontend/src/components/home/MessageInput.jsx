@@ -1,35 +1,50 @@
 import { Image, Send, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
+import { toast } from "react-hot-toast";
 
 function MessageInput() {
   const [imagePreview, setImagePreview] = useState("");
+  const [file, setFile] = useState(null);
   const [text, setText] = useState("");
   const fileInputRef = useRef(null);
-  const formData = new FormData();
   const { sendMessage, isMessageSend } = useChatStore();
 
   const handleImagePreview = (e) => {
     e.preventDefault();
-    console.log(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
-    formData.append("image", e.target.files[0]);
+    setFile(e.target.files[0]);
   };
 
   const handleRemoveImg = (e) => {
     e.preventDefault();
     setImagePreview("");
-    formData.delete("image");
+    // formData.delete("image");
   };
 
-  const handleOnsubmit = (e) => {
+  const handleOnsubmit = async (e) => {
+    const formData = new FormData();
     e.preventDefault();
     if (!text && !imagePreview) return;
-    sendMessage(formData);
+    if (!formData) return toast.error("Please upload an image");
+    if (text) formData.append("text", text);
+    if (file) formData.append("image", file);
+
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value); // Logs each key-value pair in the FormData
+    }
+    // console.log("formData", formData.getAll());
+
+    let res = await sendMessage(formData);
+    if (res) {
+      setText("");
+      setImagePreview("");
+    }
   };
 
   useEffect(() => {
-    formData.append("text", text);
+    // formData.append("text", text);
+    // console.log("formData", formData);
   }, [text]);
 
   return (
