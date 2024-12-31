@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div data-theme={theme}>
-      <div className="container mx-auto">
+      <div className="container px-5 mx-auto">
         <Routes>
           <Route path="/" element={<NavFooter />}>
             <Route

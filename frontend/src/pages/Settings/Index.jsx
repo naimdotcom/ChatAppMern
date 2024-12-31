@@ -54,9 +54,10 @@ function Settings() {
 
       {/*  */}
 
-      <div>
-        <div className="border mockup-window border-base-300 bg-base-200">
-          <div className="flex flex-col w-2/5 px-4 py-5 mx-auto rounded-lg bg-base-100">
+      <div className="flex flex-col items-center">
+        {/* window */}
+        <div className="hidden w-full border md:block mockup-window border-base-300 bg-base-200">
+          <div className="flex flex-col px-4 py-5 mx-auto md:w-2/3 xl:w-2/5 rounded-t-xl bg-base-100">
             {/* message header */}
             <div className="flex w-full gap-5">
               {/* avatar */}
@@ -82,11 +83,10 @@ function Settings() {
                     }`}
                   >
                     <div className="chat-image avatar">
-                      <div className="w-10 rounded-full">
-                        <img
-                          alt="Tailwind CSS chat bubble component"
-                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                        />
+                      <div class="avatar placeholder">
+                        <div class="bg-neutral text-neutral-content w-12 rounded-full">
+                          <span>SY</span>
+                        </div>
                       </div>
                     </div>
                     <div className="chat-header">
@@ -97,7 +97,7 @@ function Settings() {
                       className={`chat-bubble rounded-xl ${
                         item.isSent
                           ? "bg-primary text-primary-content"
-                          : "bg-base-200 text-primary"
+                          : "bg-base-200 text-base-content"
                       } `}
                     >
                       {item.content}
@@ -114,9 +114,89 @@ function Settings() {
                 type="text"
                 placeholder="Type here"
                 className="w-full rounded-full input input-bordered"
+                readOnly
               />
               <div className="px-3 py-3 rounded-full bg-neutral text-neutral-content">
                 <Send />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* mobile */}
+        <div className="block mockup-phone md:hidden">
+          <div className="camera"></div>
+          <div className=" display">
+            <div className="py-0 my-0 artboard artboard-demo phone-1">
+              <div className="w-full h-full border mockup-window border-base-300 bg-base-200">
+                <div className="flex flex-col h-full px-4 py-5 mx-auto md:w-2/3 xl:w-2/5 rounded-t-xl bg-base-100">
+                  {/* message header */}
+                  <div className="flex w-full gap-5">
+                    {/* avatar */}
+                    <div className="avatar placeholder">
+                      <div className="w-12 rounded-full bg-neutral text-neutral-content">
+                        <span>SY</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Syed Yaseen</h3>
+                      <h3>online</h3>
+                    </div>
+                  </div>
+                  <div className="divider divider-neutral"></div>
+                  {/* messages */}
+                  <div>
+                    {PREVIEW_MESSAGES.map((item, i) => {
+                      return (
+                        <div
+                          key={i}
+                          className={`chat ${
+                            item.isSent ? "chat-end" : "chat-start"
+                          }`}
+                        >
+                          <div className="chat-image avatar">
+                            <div class="avatar placeholder">
+                              <div class="bg-neutral text-neutral-content w-12 rounded-full">
+                                <span>SY</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="chat-header">
+                            Obi-Wan Kenobi
+                            <time className="px-2 text-xs opacity-50">
+                              12:45
+                            </time>
+                          </div>
+                          <div
+                            className={`chat-bubble rounded-xl ${
+                              item.isSent
+                                ? "bg-primary text-primary-content"
+                                : "bg-base-200 text-base-content"
+                            } `}
+                          >
+                            {item.content}
+                          </div>
+                          <div className="opacity-50 chat-footer">
+                            Delivered
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="divider divider-neutral"></div>
+                  {/* input */}
+                  <div className="flex items-center w-full gap-2">
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      className="w-full rounded-full input input-bordered"
+                      readOnly
+                    />
+                    <div className="px-3 py-3 rounded-full bg-neutral text-neutral-content">
+                      <Send />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
