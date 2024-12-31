@@ -64,7 +64,7 @@ function MessageInput() {
           )}
         </div>
         {/* input */}
-        <form action="">
+        <form action="" onSubmit={handleOnsubmit}>
           <div className="flex items-center w-full gap-2">
             <input
               type="text"
@@ -81,6 +81,7 @@ function MessageInput() {
                 onChange={handleImagePreview}
               />
               <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   fileInputRef.current.click();
@@ -90,7 +91,6 @@ function MessageInput() {
               </button>
             </div>
             <button
-              onClick={handleOnsubmit}
               type="submit"
               className="px-2 py-2 rounded-xl bg-neutral text-neutral-content"
             >

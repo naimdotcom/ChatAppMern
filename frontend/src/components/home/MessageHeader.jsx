@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import { MessageSquareMore, X } from "lucide-react";
+import { useAuthStore } from "../../store/useAuthStore";
 
 function MessageHeader() {
   const [user, setUser] = useState(null);
   const { selectedUser, setSelectedUser } = useChatStore();
+  const { onlineUsers } = useAuthStore();
 
   return (
     <div className="px-4 pt-4">
@@ -23,7 +25,11 @@ function MessageHeader() {
             <h3 className="font-semibold">
               {selectedUser ? selectedUser.name : ""}
             </h3>
-            <h3>online</h3>
+            <h3>
+              {selectedUser && onlineUsers.includes(selectedUser._id)
+                ? "online"
+                : "offline"}
+            </h3>
           </div>
         </div>
         <button

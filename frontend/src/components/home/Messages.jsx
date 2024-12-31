@@ -4,14 +4,22 @@ import { useAuthStore } from "../../store/useAuthStore";
 import moment from "moment";
 
 function Messages() {
-  const { messages, getMessages, selectedUser } = useChatStore();
+  const {
+    messages,
+    getMessages,
+    selectedUser,
+    subscribeMessage,
+    unsubscribeMessage,
+  } = useChatStore();
   const { authUser } = useAuthStore();
   const messageRef = useRef();
 
   useEffect(() => {
     getMessages(selectedUser._id);
-    console.log("messages", messages);
-  }, []);
+    subscribeMessage();
+    // console.log("messages", messages);
+    return () => unsubscribeMessage();
+  }, [getMessages, subscribeMessage, unsubscribeMessage]);
 
   useEffect(() => {
     if (messageRef.current && messages) {
@@ -22,7 +30,7 @@ function Messages() {
     <div className="h-full px-6 overflow-y-scroll">
       {/* messages */}
 
-      {messages.map((item, i) => {
+      {messages?.map((item, i) => {
         return (
           <div
             ref={messageRef}

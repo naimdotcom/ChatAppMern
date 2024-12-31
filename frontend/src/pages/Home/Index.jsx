@@ -7,7 +7,7 @@ import { useChatStore } from "../../store/useChatStore";
 import MessageSection from "../../components/home/MessageSection";
 
 function Home() {
-  const { authUser } = useAuthStore();
+  const { authUser, onlineUsers } = useAuthStore();
   const { selectedUser } = useChatStore();
 
   return (
@@ -28,8 +28,12 @@ function Home() {
         <div className="flex-shrink-0 w-80">
           <Sidebar />
         </div>
-        <div className=" flex-1">
-          {Object.keys(selectedUser).length ? <MessageSection /> : <NoChat />}
+        <div className="flex-1 ">
+          {Object.keys(selectedUser)?.length > 0 ? (
+            <MessageSection />
+          ) : (
+            <NoChat />
+          )}
         </div>
       </div>
     </div>

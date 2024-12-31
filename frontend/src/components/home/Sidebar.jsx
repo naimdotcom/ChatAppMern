@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useChatStore } from "../../store/useChatStore";
 import SidebarMessageSkeleton from "./SidebarMessageSkeleton";
+import { useAuthStore } from "../../store/useAuthStore";
 
 function Sidebar() {
   const { getUsers, users, setSelectedUser, isUserLoading, selectedUser } =
     useChatStore();
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers();
@@ -32,7 +34,11 @@ function Sidebar() {
                 onClick={() => setSelectedUser(user)}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 avatar online">
+                  <div
+                    className={`w-10 avatar ${
+                      onlineUsers.includes(user._id) ? "online" : "offline"
+                    }`}
+                  >
                     <div className="rounded-full ">
                       <img src={user.profilePicture} />
                     </div>

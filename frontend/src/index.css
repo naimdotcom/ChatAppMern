@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .avatar.online:before {
+    width: 25%;
+    height: 25%;
+    top: 5%;
+    right: 5%;
+  }
+  .avatar.offline:before {
+    width: 25%;
+    height: 25%;
+    top: 5%;
+    right: 5%;
+  }
+}
