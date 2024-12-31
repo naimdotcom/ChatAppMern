@@ -8,6 +8,7 @@ import {
 import { User } from "../models/user.model";
 import { Message } from "../models/message.model";
 import { uploadOnCloudinary } from "../lib/Cloudinary";
+import { getReceiverID, io } from "../lib/socketIO";
 
 const getUserForSidebar = async (req: userRequest, res: Response) => {
   try {
@@ -111,6 +112,17 @@ const sendMessage = async (req: userRequest, res: Response) => {
     });
 
     await newMessage.save();
+
+    const receiverSocketID = getReceiverID(id);
+
+    if (receiverSocketID) {
+      io.to(receiverSocketID).emit("newMessage", newMessage);
+    }
+
+    // const senderSocketID = getReceiverID(String(newMessage?.sender));
+    // if (senderSocketID) {
+    //   io.to(senderSocketID).emit("newMessage", newMessage);
+    // }
 
     res
       .status(201)
