@@ -6,10 +6,14 @@ import { connectDB } from "./lib/DB";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { app, server } from "./lib/socketIO";
+import path from "path";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5340;
+const PORT = process.env.PORT || 4000;
+
+const _dirname = path.dirname(__filename);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -23,9 +27,13 @@ app.use(
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/messages", messageRoute);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, World!");
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(_dirname, "../frontend/build")));
+
+  app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.resolve(_dirname, "../frontend/build", "index.html"));
+  });
+}
 
 connectDB().then(() => {
   server.listen(PORT, () => {
