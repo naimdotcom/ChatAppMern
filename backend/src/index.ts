@@ -29,13 +29,13 @@ app.use(
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/messages", messageRoute);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(_dirname, "../frontend/dist")));
+console.log("index.html", _dirname);
 
-  app.get("*", (req: Request, res: Response) => {
-    res.sendFile(path.resolve(_dirname, "../frontend/dist/index.html"));
-  });
-}
+app.use(express.static(path.resolve(_dirname, "../../frontend/dist")));
+
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.resolve(_dirname, "../../frontend/dist/index.html"));
+});
 
 connectDB().then(() => {
   server.listen(PORT, () => {
