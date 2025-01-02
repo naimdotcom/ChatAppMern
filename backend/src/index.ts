@@ -11,15 +11,17 @@ import path from "path";
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
-
+const origin =
+  process.env.NODE_ENV === "production"
+    ? "https://your-production-url.com"
+    : "http://localhost:5173";
 const _dirname = path.dirname(__filename);
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    // todo: update origin later as the frontend route
-    origin: "http://localhost:5173",
+    origin,
     credentials: true,
   })
 );
