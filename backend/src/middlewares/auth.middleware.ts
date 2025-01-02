@@ -56,7 +56,7 @@ const verifyJWT: CustomRequestHandler = async (
           new ApiErrorResponse<string>(
             false,
             HttpStatusResponse.unauthorized,
-            "User not found"
+            "User not found!"
           )
         );
       return;
