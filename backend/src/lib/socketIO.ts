@@ -7,12 +7,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: [
-      "https://chat-app-node-ynwk.onrender.com",
-      /https:\/\/.*\.onrender\.com$/,
-      "http://localhost:5173",
-      "http://localhost:4000",
-    ],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
