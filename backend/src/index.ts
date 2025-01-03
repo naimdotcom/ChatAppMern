@@ -18,7 +18,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin,
+    origin: [
+      "https://chat-app-node-ynwk.onrender.com",
+      /https:\/\/.*\.onrender\.com$/,
+      "http://localhost:5173",
+      "http://localhost:4000",
+    ],
     credentials: true,
   })
 );
